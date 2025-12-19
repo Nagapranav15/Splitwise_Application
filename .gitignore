@@ -1,0 +1,22 @@
+# Compiled class files
+*.class
+out/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# MySQL
+*.sql~
+
