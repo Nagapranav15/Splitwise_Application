@@ -75,10 +75,10 @@ The project includes a MySQL schema file for future database integration:
 To set up the database:
 
 ```bash
-mysql -u <username> -p < database/schema.sql
+mysql -u root -p < database/schema.sql
 ```
 
-Replace `<username>` with your MySQL username. You will be prompted for your password.
+This uses the MySQL user `root`. You will be prompted for your password.
 
 ## Usage Example
 

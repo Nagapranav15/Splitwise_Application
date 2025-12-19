@@ -20,3 +20,5 @@ Thumbs.db
 # MySQL
 *.sql~
 
+# Local secrets
+db.properties
