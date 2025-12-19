@@ -1,174 +1,105 @@
-# Expense-Sharing-Application
+# 💰 Splitwise Clone - Expense Sharing Made Easy
 
-A console-based Java application that simulates an expense sharing system similar to Splitwise. This application allows users to create groups, add expenses with different split types, track balances, and settle dues.
+Tired of awkward money conversations with friends? This Splitwise clone takes the hassle out of splitting bills and tracking shared expenses. Whether you're splitting rent, dinner bills, or travel costs, this application makes it simple to track who owes what.
 
-## Features
+## ✨ Key Features
 
-- **User Management**: Create and manage users with unique IDs
-- **Group Management**: Create groups and add multiple users
-- **Expense Management**: Support for three split types:
-  - **EQUAL**: Split amount equally among participants
-  - **EXACT**: Specify exact amounts per user
-  - **PERCENT**: Split based on percentages
-- **Balance Tracking**: Track who owes whom with automatic balance simplification
-- **Settlement**: Full or partial settlement of dues between users
-- **Edge Case Handling**: Validates invalid splits and prevents over-settlement
+- **Multiple Split Options**
+  - 🟢 **Equal Split** - Split the bill evenly
+  - 🔢 **Exact Amounts** - Specify who pays what
+  - 📊 **Percentage Split** - Divide by custom percentages
+- **Group Expenses** - Perfect for trips, roommates, or team lunches
+- **Real-time Balances** - Instantly see who's up and who's down
+- **Settle Up** - Mark expenses as paid with a single click
+- **Persistent Storage** - Your data is safe with MySQL
 
-## Technology Stack
+## 🛠 Tech Stack
 
-- **Language**: Java 8+
-- **Database**: MySQL 8.0+ (with JDBC driver)
-- **Build Tool**: Maven (for dependency management)
-- **Architecture**: Layered Architecture with Repository Pattern
-- **Design Patterns**: Singleton, Factory, Repository
+- **Backend**: Java 8+
+- **Database**: MySQL 8.0+
+- **Build Tool**: Maven
+- **Architecture**: Layered (MVC + Repository Pattern)
 
-## Project Structure
+## 🚀 Quick Start
+
+### Prerequisites
+- Java 8 or higher
+- MySQL Server 8.0+
+- Maven (recommended)
+
+### One-Command Setup (Maven)
+```bash
+git clone https://github.com/Nagapranav15/Splitwise_Application.git
+cd Splitwise_Application
+mvn clean package
+java -cp "target/classes:target/dependency/*" splitwise.Main
+```
+
+## 🏗 Project Structure
 
 ```
 src/
 ├── splitwise/
-│   ├── Main.java                    # Main application entry point
-│   ├── model/                       # Domain entities
-│   │   ├── User.java
-│   │   ├── Group.java
-│   │   ├── Expense.java
-│   │   ├── Split.java               # Abstract base class
-│   │   ├── EqualSplit.java
-│   │   ├── ExactSplit.java
-│   │   ├── PercentSplit.java
-│   │   └── SplitType.java           # Enum for split types
-│   ├── service/                     # Business logic services
-│   │   ├── UserService.java
-│   │   ├── GroupService.java
-│   │   ├── ExpenseService.java
-│   │   └── BalanceService.java      # Handles balance simplification
-│   ├── repository/                  # Data access layer
-│   │   ├── UserRepository.java      # Repository interface
-│   │   ├── GroupRepository.java     # Repository interface
-│   │   └── impl/                    # Repository implementations
-│   │       ├── UserRepositoryImpl.java
-│   │       └── GroupRepositoryImpl.java
-│   └── db/                          # Database utilities
-│       ├── DbConfig.java            # Database configuration
-│       ├── DbConnection.java        # Connection management
-│       └── DbInitializer.java       # Database initialization
-├── resources/
-│   └── db.properties.example        # Example database config
-database/
-└── schema.sql                       # MySQL database schema
+│   ├── model/       # 🧑‍💼 Core business models
+│   ├── service/     # 🛠 Business logic
+│   ├── repository/  # 💾 Data access layer
+│   └── db/          # 🔌 Database utilities
+├── database/        # 🗃 SQL schema
+└── resources/       # ⚙️  Configuration
 ```
 
-## Getting Started
+## ⚙️ Configuration
 
-### Prerequisites
-- Java JDK 8 or higher
-- MySQL Server 8.0+
-- Maven (recommended) or manual JDBC driver setup
+1. **Set up your database**:
+   ```bash
+   mysql -u root -p < database/schema.sql
+   ```
 
-### Build and Run with Maven
-```bash
-# Clone the repository
-git clone https://github.com/Nagapranav15/Splitwise_Application.git
-cd Splitwise_Application
-
-# Build the project
-mvn clean package
-
-# Run the application
-java -cp "target/classes:target/dependency/*" splitwise.Main
-```
-
-### Manual Compilation and Execution
-```bash
-# Compile
-javac -cp "lib/mysql-connector-j-8.x.x.jar" -d out -sourcepath src src/splitwise/Main.java
-
-# Run
-java -cp "out:lib/mysql-connector-j-8.x.x.jar" splitwise.Main
-```
-
-## Database Setup
-
-### Prerequisites
-- MySQL Server 8.0+ installed and running
-- MySQL user with appropriate privileges
-
-### 1. Create Database
-```bash
-mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS splitwise_db;"
-```
-
-### 2. Import Schema
-```bash
-mysql -u root -p splitwise_db < database/schema.sql
-```
-
-### 3. Configure Database Connection
-1. Copy the example configuration file:
+2. **Configure your credentials**:
    ```bash
    cp db.properties.example db.properties
-   ```
-2. Edit `db.properties` with your MySQL credentials:
-   ```properties
-   db.url=jdbc:mysql://localhost:3306/splitwise_db?useSSL=false&serverTimezone=UTC
-   db.username=your_username
-   db.password=your_password
+   # Edit db.properties with your MySQL credentials
    ```
 
-### 4. Add MySQL JDBC Driver
-Download the MySQL Connector/J and add it to your classpath:
-```bash
-# For Maven, add to pom.xml:
-# <dependency>
-#     <groupId>mysql</groupId>
-#     <artifactId>mysql-connector-java</artifactId>
-#     <version>8.0.27</version>
-# </dependency>
+3. **Add MySQL JDBC Driver**:
+   - For Maven users: Already included in `pom.xml`
+   - Manual setup: Download from [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/)
 
-# For manual setup, download from:
-# https://dev.mysql.com/downloads/connector/j/
+## 🎮 Demo
+
+```
+=== Splitwise Clone ===
+
+1. Creating users...
+   ✅ Alice, Bob, Charlie, and Diana joined
+
+2. Adding expenses...
+   🏨 Hotel: $400 (EQUAL split)
+   🍽️ Dinner: $150 (EXACT split)
+   🚖 Taxi: $200 (PERCENT split)
+
+3. Viewing balances...
+   Bob owes Alice: $50.00
+   Charlie owes Bob: $30.00
+   Diana owes Alice: $100.00
 ```
 
-## Usage Example
+## 🤝 Contributing
 
-The application demonstrates:
+Found a bug or have an idea? We'd love your help!
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-1. Creating users (Alice, Bob, Charlie, Diana)
-2. Creating a group and adding members
-3. Adding expenses with different split types:
-   - Hotel booking: $400 (EQUAL split)
-   - Restaurant: $150 (EXACT split)
-   - Taxi: $200 (PERCENT split)
-4. Viewing balances (simplified and per-user)
-5. Settling dues between users
-6. Error handling for invalid inputs
+## 📝 License
 
-## Design Principles
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-- **SOLID Principles**: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
-- **Layered Architecture**:
-  - Presentation Layer: `Main` class for console I/O
-  - Service Layer: Business logic in `service` package
-  - Repository Layer: Data access in `repository` package
-  - Domain Layer: Core business entities in `model` package
-- **Repository Pattern**: Abstract data access layer for database operations
-- **Dependency Injection**: Manual dependency injection for better testability
+---
 
-## Security Considerations
-
-- Database credentials are stored in `db.properties` (not version controlled)
-- Example configuration is provided in `db.properties.example`
-- Always use environment variables or secure vaults for production credentials
-- **Precision**: Uses `BigDecimal` for financial calculations to avoid rounding errors
-- **Balance Simplification**: Minimizes the number of transactions needed to settle all dues
-
-## Key Components
-
-### Models
-- **User**: Represents a user with unique ID and name
-- **Group**: Represents a group containing multiple users
-- **Expense**: Represents an expense with amount, paid-by user, participants, and split type
-- **Split**: Abstract base class for different split types
+Made with ❤️ by Nagapranav - because splitting bills should be easy, not awkward!
 
 ### Services
 - **UserService**: Manages user creation and retrieval
